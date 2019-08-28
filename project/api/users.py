@@ -9,6 +9,7 @@ from project.api.models import User
 users_blueprint = Blueprint('users', __name__, template_folder='./templates')
 api = Api(users_blueprint)
 
+
 @users_blueprint.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -23,9 +24,10 @@ def index():
 class UsersPing(Resource):
     def get(self):
         return {
-        'status': 'success',
-        'message': 'pong!'
-    }
+            'status': 'success',
+            'message': 'pong!'
+        }
+
 
 class UsersList(Resource):
     def get(self):
@@ -57,7 +59,8 @@ class UsersList(Resource):
                 response_object['message'] = f'{email} was added!'
                 return response_object, 201
             else:
-                response_object['message'] = 'Sorry. That email already exists.'
+                response_object['message'] \
+                    = 'Sorry. That email already exists.'
                 return response_object, 400
         except exc.IntegrityError:
             db.session.rollback()
@@ -93,4 +96,3 @@ class Users(Resource):
 api.add_resource(UsersPing, '/users/ping')
 api.add_resource(UsersList, '/users')
 api.add_resource(Users, '/users/<user_id>')
-

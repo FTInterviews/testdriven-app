@@ -32,7 +32,7 @@ class UsersPing(Resource):
     def get(self):
         return {
         'status': 'success',
-        'message': 'ponggggg!'
+        'message': 'pong!'
     }
 
 
